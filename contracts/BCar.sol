@@ -4,7 +4,7 @@ pragma solidity >=0.4.22 <0.9.0;
 contract BCar {
   // Chat Module
   /**
-  *? User=> :SignUp /, :LogIn/, :LogOut
+  *? User=> :SignUp /, :LogIn/, :LogOut /
    */
   
    struct User {
@@ -20,7 +20,8 @@ contract BCar {
    
   //  event is a log creates on trigger. 
    event userSignedUp(string _nam, uint _nic, string u_cont, string u_pass);
-   
+   event LogoutUser(bool isUserLoggedIn);
+
    mapping (uint=>User) public userList;
 
    function signUp(uint _nic, string memory _nam, string memory _cont, string memory _addr, string memory _pass) public returns (bool) {
@@ -40,6 +41,7 @@ contract BCar {
 
    function LogIn(uint _nic, string memory _pass) public returns (string memory) {
     require(isUserExist(_nic),  "User exists!");
+    require(!isLoggedIn(_nic), "You are Already Logged In!");
     if (keccak256(abi.encodePacked(_pass)) ==
                 keccak256(abi.encodePacked(userList[_nic].u_password))) {
                   // if user exists and password is correct
@@ -49,6 +51,12 @@ contract BCar {
     // if user exists and password is incorrect
     return 'Failed';
    }
+    
+    function LogOut(uint _nic) public returns (bool) {
+      require(isLoggedIn(_nic), "You Need To Log In First!");
+      userList[_nic].isLoggedIn = false;
+      emit LogoutUser(false);
+    }
 
     /**
   *? Friends=> :addNewFriend , :checkAlreadyFriends , :LoopOnFriend 
@@ -109,6 +117,5 @@ contract BCar {
    function isLoggedIn(uint _nic) public view returns (bool) {
     return userList[_nic].isLoggedIn;
    }
-
 
 }
