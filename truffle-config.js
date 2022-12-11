@@ -11,5 +11,9 @@ module.exports = {
          enabled: false,
          runs: 200
        },
+    },compilers: {
+      solc: {
+        version: "0.8.17"
+      }
     }
 };

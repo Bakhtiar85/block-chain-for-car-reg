@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.22 <0.9.0;
+pragma solidity >=0.7.0 <0.9.0;
 
 contract BCar {
   // Chat Module
   /**
-  *? User=> :SignUp /, :LogIn/, :LogOut /
+  *? User=> :SignUp /, :LogIn/, :LogOut /, :getFriendsList
    */
   
    struct User {
@@ -39,23 +39,24 @@ contract BCar {
     return true;
    }
 
-   function LogIn(uint _nic, string memory _pass) public returns (string memory) {
-    require(isUserExist(_nic),  "User exists!");
+   function LogIn(uint _nic, string memory _pass) public returns (bool) {
+    require(isUserExist(_nic),  "User does not exists!");
     require(!isLoggedIn(_nic), "You are Already Logged In!");
-    if (keccak256(abi.encodePacked(_pass)) ==
-                keccak256(abi.encodePacked(userList[_nic].u_password))) {
-                  // if user exists and password is correct
-                  userList[_nic].isLoggedIn = true;
-      return 'Success';
-    }    
-    // if user exists and password is incorrect
-    return 'Failed';
+    require(keccak256(abi.encodePacked(_pass)) == keccak256(abi.encodePacked(userList[_nic].u_password)), "Passwor Does Not Matched!");
+    return userList[_nic].isLoggedIn = true;
    }
     
     function LogOut(uint _nic) public returns (bool) {
       require(isLoggedIn(_nic), "You Need To Log In First!");
-      userList[_nic].isLoggedIn = false;
       emit LogoutUser(false);
+      return userList[_nic].isLoggedIn = false;
+    }
+
+    function getFriendsList(uint _nic) external view returns(Friend[] memory) {
+      require(isUserExist(_nic),  "User exists!");
+      require(isLoggedIn(_nic), "You Need To Log In First!");
+
+      return userList[_nic].friendList;
     }
 
     /**
