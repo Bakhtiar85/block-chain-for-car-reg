@@ -6,9 +6,8 @@ contract BCar {
   /**
   *? User=> :SignUp, :LogIn, :Loop, :isExists, :isLoggedIn
    */
-
+  
    struct User {
-    address pbKey;
     uint u_nic;
     string u_name;
     string u_contact;
@@ -20,23 +19,26 @@ contract BCar {
    }
    
   //  event is a log creates on trigger. 
-   event userSignedUp(address _key, string _nam, uint _nic, string u_cont, string u_pass);
+   event userSignedUp(string _nam, uint _nic, string u_cont, string u_pass);
    
-   mapping (address=>User) public userList;
+   mapping (uint=>User) public userList;
 
-   function signUp(address _key, uint _nic, string memory _nam, string memory _cont, string memory _addr, string memory _pass) public returns (bool) {
-    require(userList[_key].pbKey != msg.sender,  "User already exists!");
+   function signUp(uint _nic, string memory _nam, string memory _cont, string memory _addr, string memory _pass) public returns (bool) {
+    require(!isUserExist(_nic),  "User already exists!");
     
-    userList[_key].pbKey = _key;
-    userList[_key].u_nic = _nic;
-    userList[_key].u_name = _nam;
-    userList[_key].u_contact = _cont;
-    userList[_key].u_address = _addr;
-    userList[_key].u_password = _pass;
+    userList[_nic].u_nic = _nic;
+    userList[_nic].u_name = _nam;
+    userList[_nic].u_contact = _cont;
+    userList[_nic].u_address = _addr;
+    userList[_nic].u_password = _pass;
 
-    emit userSignedUp(_key, _nam, _nic, _cont, _pass);
+    emit userSignedUp(_nam, _nic, _cont, _pass);
 
     return true;
+   }
+
+   function isUserExist(uint _nic) public view returns (bool) {
+    return bytes(userList[_nic].u_name).length > 0;
    }
 
 }
