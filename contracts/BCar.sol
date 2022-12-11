@@ -2,9 +2,13 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 contract BCar {
+  /**
+   * ! I might need to add public Key 'ACCOUNT ADDRESS' of users
+   */
+  
   // Chat Module
   /**
-  *? User=> :SignUp /, :LogIn/, :LogOut /, :getFriendsList
+  *? User=> :SignUp /, :LogIn/, :LogOut /, :getFriendsList /
    */
   
    struct User {
@@ -60,7 +64,7 @@ contract BCar {
     }
 
     /**
-  *? Friends=> :addNewFriend , :checkAlreadyFriends , :LoopOnFriend 
+  *? Friends=> :addNewFriend /, :checkAlreadyFriends /, :LoopOnFriend /
    */
 
     // Each friend is identified by its address and name assigned by the second party
@@ -106,7 +110,50 @@ contract BCar {
       // add newly created obj to friend list of user
       userList[me].friendList.push(newFriend);
   }
+
+/**
+ *? Messages' Funcions=> :
+ */
+
+// message construct stores the single chat message and its metadata
+    struct message {
+        // address sender;
+        uint sender_nic;
+        uint256 timestamp;
+        string msg;
+    }
    
+   event SendMessage(uint sender_key, uint friend_key, string msg);
+   
+    // Collection of messages communicated in a channel between two users
+    mapping(bytes32 => message[]) allMessages; // key : Hash(user1,user2)
+
+       // Returns a unique code for the channel created between the two users
+    // Hash(key1,key2) where key1 is lexicographically smaller than key2
+    // function _getChatCode(address pubkey1, address pubkey2) internal pure returns(bytes32) {
+    function _getChatCode(uint _nic, uint f_nic) internal pure returns(bytes32) {
+        if(_nic < f_nic)
+            return keccak256(abi.encodePacked(_nic, f_nic));
+        else
+            return keccak256(abi.encodePacked(f_nic, _nic));
+    }
+   
+       // Sends a new message to a given friend
+    function sendMessage(uint _nic, uint f_nic, string calldata _msg) external {
+      require(isLoggedIn(_nic), "You Need To Log In First!");
+      require(isUserExist(f_nic),  "Your Firend Does Not Registered With The System!");
+      require(areFriends(_nic,f_nic)==true, "You are not friends with the given user!");
+        bytes32 chatCode = _getChatCode(_nic, f_nic);
+        message memory newMsg = message(_nic, block.timestamp, _msg);
+        allMessages[chatCode].push(newMsg);
+        emit SendMessage(_nic, f_nic, _msg);
+    }
+   
+   // Returns all the chat messages communicated in a channel
+    function readMessage(uint _nic, uint f_nic) external view returns(message[] memory) {
+        bytes32 chatCode = _getChatCode(_nic, f_nic);
+        return allMessages[chatCode];
+    }
 /** 
  *? general purpose functions =>  :Loop, :isExists/, :isLoggedIn/
  */
@@ -118,5 +165,6 @@ contract BCar {
    function isLoggedIn(uint _nic) public view returns (bool) {
     return userList[_nic].isLoggedIn;
    }
+
 
 }
