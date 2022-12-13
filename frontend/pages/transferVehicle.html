@@ -52,9 +52,11 @@
                             <li class="flex items-center gap-[14px]">
                                 <Button class="btn btn-circle user_id">
                                 </Button>
-                                <Button onclick="App.logoutUser()">
-                                    Logout
-                                </Button>
+                                <form onSubmit="App.logoutUser(); return false;">
+                                    <Button type="button">
+                                        Logout
+                                    </Button>
+                                </form>
                                 <!-- <p id="icon-cirlce" class="bg-[#5034b8] text-white">P</p>
                                 <p class="triangle-down"></p> -->
                             </li>

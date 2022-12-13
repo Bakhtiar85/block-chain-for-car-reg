@@ -173,7 +173,7 @@ App = {
                 var year = element['year'];
                 var is_reg_with_owner = element['reg_with_owner'];
                 if (is_reg_with_owner) {
-                    vehicle_option.append("<option value=" + e_no + ">" + v_no +' & '+ e_no+ "</option>")
+                    vehicle_option.append("<option value='" + e_no + "'>" + v_no +' & '+ e_no+ "</option>")
                     text_class = '';
                 }
                 
@@ -234,7 +234,7 @@ App = {
         if (_vehno) {
             // console.log(_vehno);
             // https://stackoverflow.com/questions/54845472/solidity-truffle-error-vm-exception-while-processing-transaction-invalid-op
-            transferVehicleResponse = await App.bCar.transferVehicle(user_id, _vehno, _new_cnic, { from: App.account });
+            transferVehicleResponse = await App.bCar.transferVehicle(user_id, _new_cnic, _vehno, { from: App.account });
         }
         console.log(transferVehicleResponse);
     },
@@ -242,7 +242,8 @@ App = {
     logoutUser: async () => {
         var user_name = localStorage.getItem('userName');
         var user_id = localStorage.getItem('userId');
-        if (user_name && user_id && !await App.bCar.LogOut(user_id)) {
+        if (user_name && user_id ) {
+            await App.bCar.LogOut(user_id, {from: App.account})
             localStorage.clear();
             window.location.href = '../index.html';
         }
