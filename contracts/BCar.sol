@@ -6,7 +6,7 @@ contract BCar {
      * ! I might need to add public Key 'ACCOUNT ADDRESS' of users
      */
 
-    // Chat Module
+    // Chat Module /, Vehicle Moduel
     /**
      *? User=> :SignUp /, :LogIn/, :LogOut /, :getFriendsList /
      */
@@ -19,7 +19,6 @@ contract BCar {
         string u_password;
         bool isLoggedIn;
         Friend[] friendList;
-        // vehicle[] vehicleList;
     }
 
     //  event is a log creates on trigger.
@@ -97,10 +96,7 @@ contract BCar {
         string calldata f_name
     ) external {
         require(isLoggedIn(_nic), "You Need To Log In First!");
-        require(
-            isUserExist(f_nic),
-            "Your Firend Does Not Registered With The System!"
-        );
+        require(isUserExist(f_nic), "Your Firend Does Not Registered With The System!");
         require(_nic != f_nic, "User cannot add him/her self as friend!");
         require(
             areFriends(_nic, f_nic) == false,
@@ -205,7 +201,47 @@ contract BCar {
     }
 
     /**
-     *? general purpose functions =>  :Loop, :isExists/, :isLoggedIn/
+    *? Vehicles => :addNewVehicle /, :isVehicleRegistered /, :getVehicleInfo /
+    *! vehilce will be tracked through engin no. 
+    *! I have been triying to track a vehicle both on its engin and vehicle no. But don't know why code was misbehaving. 
+     */
+
+    struct Vehicle{
+        string e_no;
+        string v_no;
+        string company;
+        string modal;
+        string year;
+        bool reg_with_owner;
+    }
+
+    mapping(string => Vehicle) public vehicleList;
+
+    event newVehicleAdded(string e_no, string v_no, string company, string modal, string year, bool reg_with_owner);
+    
+    function addNewVehicle(uint256 _nic, string memory v_no, string memory e_no, string memory company, string memory modal, string memory year) public returns(bool){
+        require(isLoggedIn(_nic), "You Need To Log In First!");
+        require(!isVehicleRegistered(e_no), "Vehicle Already Rdgistered");
+  
+        vehicleList[v_no].e_no = e_no;
+        vehicleList[v_no].v_no = v_no;
+        vehicleList[v_no].company = company;
+        vehicleList[v_no].modal = modal;
+        vehicleList[v_no].year = year;
+        vehicleList[v_no].reg_with_owner = true;
+
+        emit newVehicleAdded(e_no, v_no, company, modal, year, true);
+
+        return true;
+
+    }
+
+    /**
+     *? userVehicles functions =>  :Loop, :isUserExists/, :isLoggedIn/, :isVehicleExists
+     */
+
+    /**
+     *? general purpose functions =>  :Loop, :isUserExists/, :isLoggedIn/, :isVehicleExists
      */
 
     function isUserExist(uint256 _nic) public view returns (bool) {
@@ -214,5 +250,9 @@ contract BCar {
 
     function isLoggedIn(uint256 _nic) public view returns (bool) {
         return userList[_nic].isLoggedIn;
+    }
+
+    function isVehicleRegistered(string memory e_no) public view returns (bool) {
+        return vehicleList[e_no].reg_with_owner;
     }
 }
