@@ -8,7 +8,7 @@ contract BCar {
 
     // Chat Module /, Vehicle Moduel
     /**
-     *? User=> :SignUp /, :LogIn/, :LogOut /, :getFriendsList /
+     *? User=> :SignUp /, :LogIn/, :LogOut /, :getUserInfo, :getFriendsList /
      */
 
     struct User {
@@ -63,6 +63,17 @@ contract BCar {
         require(isLoggedIn(_nic), "You Need To Log In First!");
         emit LogoutUser(false);
         return userList[_nic].isLoggedIn = false;
+    }
+
+    function getUserInfo(uint256 _nic) public view returns (uint256, string memory, string memory, string memory,bool) {
+        require(isUserExist(_nic), "User does not exists!");
+        return (
+            userList[_nic].u_nic,
+            userList[_nic].u_name,
+            userList[_nic].u_contact,
+            userList[_nic].u_address,
+            userList[_nic].isLoggedIn
+            );
     }
 
     function getFriendsList(uint256 _nic)

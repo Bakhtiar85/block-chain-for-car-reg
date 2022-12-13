@@ -51,7 +51,7 @@ App = {
 
     loadContract: async () => {
         // Create a JavaScript version of the smart contract
-        const bCar = await $.getJSON('../assets/contracts/MyBcar.json');
+        const bCar = await $.getJSON('/build/contracts/BCar.json');
         App.contracts.BCar = TruffleContract(bCar);
         App.contracts.BCar.setProvider(App.web3Provider);
 
@@ -97,7 +97,7 @@ App = {
 
         // _cnic = parseInt(_cnic);
 
-        const setUserResponse = await App.bCar.createUser(_cnic, _fullname, _contact, _address, _password, { from: App.account });
+        const setUserResponse = await App.bCar.signUp(_cnic, _fullname, _contact, _address, _password, { from: App.account });
 
         console.log(setUserResponse);
 
@@ -116,9 +116,8 @@ App = {
 
         var cnic = parseInt($('#user_nic').val().replaceAll('-', ''));
         var pass = $('#password').val();
-        const userAccount = await App.bCar.userLogin(cnic, pass, { from: App.account });
-        // console.log(userAccount);
-        if (userAccount) {
+        
+        await App.bCar.LogIn(cnic, pass, { from: App.account }).then(async(response) => {
             const userInfo = await App.bCar.getUserInfo(cnic, { from: App.account });
             const userVehicles = await App.bCar.getUserVehicles(cnic, { from: App.account });
             console.log(userVehicles);
@@ -126,10 +125,9 @@ App = {
             localStorage.setItem('userName', userInfo[1])
             localStorage.setItem('userCity', userInfo[2])
             window.location.href = './profile.html';
-        } else {
-            alert('Something went Wrong!');
-        }
-
+        }).catch((err) => {
+            console.log("Failed with error: " + JSON.stringify(err));
+        });
     },
 
     getUserInfo: async () => {
@@ -149,11 +147,11 @@ App = {
         var _model = $('input#model').val();//
         var _year = $('input#year').val();//
         // var _chano = $('input#chano').val();
+        // var _color = $('input#color').val();
 
-        var registrationResponse = await App.bCar.createVehicle(user_cnic, _vehno, _engno, /* _chano */  _company, _model, _year, { from: App.account });
+        var registrationResponse = await App.bCar.addNewVehicle(user_cnic, _engno, _vehno, /* _chano */  _company, _model, _year, { from: App.account });
         console.log(registrationResponse);
 
-        // var _color = $('input#color').val();
     },
 
     getUserVehicles: async () => {
@@ -161,21 +159,27 @@ App = {
         var user_id = localStorage.getItem('userId');
         var u_vehicles = $('table#u_vehicles tbody');
         var vehicle_option = $('#vehicles_select');
+        var text_class = 'text-red-300';
         if (user_id) {
             const userVehicles = await App.bCar.getUserVehicles(user_id);
+            
             userVehicles.forEach(async (element, count) => {
+                console.log(element);
 
-
-                var vinfo = await App.bCar.getVehicleInfo(element.toNumber(), { from: App.account })
-                var v_no = vinfo[2];
-                var e_no = vinfo[3];
-                var company = vinfo[4];
-                var model = vinfo[5];
-                var year = vinfo[6];
-                vehicle_option.append("<option value=" + element.toNumber() + ">" + v_no + "</option>")
-
-                var v_tr = "<tr><th  scope = 'row' >" + ++count + "</th><td>" + v_no + "</td><td>" + e_no + "</td><td>" + company + "</td><td>" + model + "</td><td>" + year + "</td></tr>";
+                var e_no = element['e_no'];
+                var v_no = element['v_no'];
+                var company = element['company'];
+                var model = element['modal'];
+                var year = element['year'];
+                var is_reg_with_owner = element['reg_with_owner'];
+                if (is_reg_with_owner) {
+                    vehicle_option.append("<option value=" + e_no + ">" + v_no +' & '+ e_no+ "</option>")
+                    text_class = '';
+                }
+                
+                var v_tr = "<tr class="+text_class+"><th  scope = 'row' >" + ++count + "</th><td>" + v_no + "</td><td>" + e_no + "</td><td>" + company + "</td><td>" + model + "</td><td>" + year + "</td></tr>";
                 u_vehicles.append(v_tr);
+                
             });
         }
     },
@@ -238,7 +242,7 @@ App = {
     logoutUser: async () => {
         var user_name = localStorage.getItem('userName');
         var user_id = localStorage.getItem('userId');
-        if (user_name && user_id) {
+        if (user_name && user_id && !await App.bCar.LogOut(user_id)) {
             localStorage.clear();
             window.location.href = '../index.html';
         }
@@ -255,11 +259,12 @@ App = {
 }
 
 
-$(() => {
+// $(() => {
     $(window).on('load', (() => {
         App.load();
+        // alert('hello');
     }))
-});
+// });
 
 
 // deprecated code
