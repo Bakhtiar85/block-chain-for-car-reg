@@ -201,7 +201,8 @@ contract BCar {
     }
 
     /**
-    *? Vehicles => :addNewVehicle /, :isVehicleRegistered /, :getVehicleInfo /
+    *? Vehicles => :addNewVehicle /, :isVehicleRegistered /, :getVehicleInfo /, :_addVehicle /
+    * *_addVehicle is used to link vehicle with user
     *! vehilce will be tracked through engin no. 
     *! I have been triying to track a vehicle both on its engin and vehicle no. But don't know why code was misbehaving. 
      */
@@ -212,36 +213,92 @@ contract BCar {
         string company;
         string modal;
         string year;
+        uint256 owner_id;
         bool reg_with_owner;
     }
 
     mapping(string => Vehicle) public vehicleList;
 
-    event newVehicleAdded(string e_no, string v_no, string company, string modal, string year, bool reg_with_owner);
+    event newVehicleAdded(string e_no, string v_no, string company, string modal, string year, uint256 owner_id, bool reg_with_owner);
     
-    function addNewVehicle(uint256 _nic, string memory v_no, string memory e_no, string memory company, string memory modal, string memory year) public returns(bool){
+    function addNewVehicle(uint256 _nic, string memory e_no, string memory v_no, string memory company, string memory modal, string memory year) public returns(bool){
         require(isLoggedIn(_nic), "You Need To Log In First!");
         require(!isVehicleRegistered(e_no), "Vehicle Already Rdgistered");
   
-        vehicleList[v_no].e_no = e_no;
-        vehicleList[v_no].v_no = v_no;
-        vehicleList[v_no].company = company;
-        vehicleList[v_no].modal = modal;
-        vehicleList[v_no].year = year;
-        vehicleList[v_no].reg_with_owner = true;
+        vehicleList[e_no].e_no = e_no;
+        vehicleList[e_no].v_no = v_no;
+        vehicleList[e_no].company = company;
+        vehicleList[e_no].modal = modal;
+        vehicleList[e_no].year = year;
+        vehicleList[e_no].owner_id = _nic;
+        vehicleList[e_no].reg_with_owner = true;
 
-        emit newVehicleAdded(e_no, v_no, company, modal, year, true);
+        
+        emit newVehicleAdded(e_no, v_no, company, modal, year, _nic, true);
+        _addVehicle(_nic, e_no);
 
         return true;
 
     }
 
-    /**
-     *? userVehicles functions =>  :Loop, :isUserExists/, :isLoggedIn/, :isVehicleExists
-     */
+    function getVehicleInfo(string memory e_no) public view returns (string memory, string memory, string memory, string memory, string memory, uint256, bool) {
+        require(isVehicleRegistered(e_no), "Vehicle is not Registered");
+        return (
+            vehicleList[e_no].e_no,
+            vehicleList[e_no].v_no,
+            vehicleList[e_no].company,
+            vehicleList[e_no].modal,
+            vehicleList[e_no].year,
+            vehicleList[e_no].owner_id,
+            vehicleList[e_no].reg_with_owner
+        );
+    }
 
     /**
-     *? general purpose functions =>  :Loop, :isUserExists/, :isLoggedIn/, :isVehicleExists
+     *? userVehicles functions =>  :_addVehicle /, :getUserVehicles /, :transferVehicle /
+     ** _addVehicle is a helper funtion to add vehilce to the user. 
+     */
+
+    struct UserVehicles {
+        uint256 user_id;
+        Vehicle[] vehicles_data;
+    }
+
+    mapping (uint256=>UserVehicles) public userVehicles;
+
+    function _addVehicle(uint256 _nic, string memory e_no) public {
+        userVehicles[_nic].vehicles_data.push(vehicleList[e_no]);
+    }
+
+    function getUserVehicles(uint256 _nic) external view returns (Vehicle[] memory){
+        require(isLoggedIn(_nic), "You Need To Log In First!");
+
+        return userVehicles[_nic].vehicles_data;
+    }
+
+    function transferVehicle(uint256 _nic, uint256 n_nic, string memory e_no) public {
+        require(isLoggedIn(_nic), "You Need To Log In First!");
+        require(_nic != n_nic, "User cannot transfer the vehicle data on his/her account!");
+        require(isUserExist(n_nic), "Other User Is Not Registered!");
+        require(isVehicleRegistered(e_no), "Vehicle You Are Trying To Transfer is Not Registered!");
+        require(isVehicleRegisteredWithTheUser(e_no, _nic), "Vehicle You Are Trying To Transfer is Not Registered With You!");
+
+        // complex code
+        // on following line vehicle will be transfered to new user. 
+        _addVehicle(n_nic, e_no);
+        // turn current user's status to false
+        for (uint256 i = 0; i < userVehicles[_nic].vehicles_data.length; i++) {
+            if(keccak256(abi.encodePacked(userVehicles[_nic].vehicles_data[i].e_no)) == keccak256(abi.encodePacked(e_no)) && userVehicles[_nic].vehicles_data[i].reg_with_owner == true){
+                userVehicles[_nic].vehicles_data[i].reg_with_owner = false;
+                vehicleList[e_no].owner_id = n_nic;
+                break;
+            }
+        }
+        
+    }
+
+    /**
+     *? general purpose functions =>  :Loop, :isUserExists/, :isLoggedIn/, :isVehicleExists /
      */
 
     function isUserExist(uint256 _nic) public view returns (bool) {
@@ -255,4 +312,9 @@ contract BCar {
     function isVehicleRegistered(string memory e_no) public view returns (bool) {
         return vehicleList[e_no].reg_with_owner;
     }
+
+    function isVehicleRegisteredWithTheUser(string memory e_no, uint256 _nic) public view returns (bool) {
+        return vehicleList[e_no].owner_id == _nic;
+    }
+    
 }
