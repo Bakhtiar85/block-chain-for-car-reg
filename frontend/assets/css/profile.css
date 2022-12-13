@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat';
+}
+
+.header-area {
+    background: url("../imgs/hero-image.png");
+    height: 91vh;
+    background-size: cover;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+}
+
+.links span a {
+    margin: 1em;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+.links span a:hover {
+    text-decoration: underline;
+}
+
+.links {
+    margin: auto;
+}
+
+.cta-btn {
+    margin: auto;
+}
+
+.logout-btn {
+    padding: 1em;
+    margin: auto 2em;
+}
+
+.user-info h5 {
+    margin: auto;
+    color: white;
+    margin: 1em;
+    font-size: 16px;
+}
+
+.vehicle-table {
+    width: 80%;
+    margin: 7em auto;
+}
+
+table.customTable {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-collapse: collapse;
+    border-width: 2px;
+    border-color: #F87272;
+    border-style: solid;
+    color: #000000;
+  }
+  
+  table.customTable td, table.customTable th {
+    border-width: 2px;
+    border-color: #F87272;
+    border-style: solid;
+    padding: 5px;
+  }
+  
+  table.customTable thead {
+    background-color: #F85959;
+  }
+
+  .hero-section {
+      color: white;
+      text-align: center;
+  }
+  
+  .focus {
+      color: red;
+  }
+
+  .about-btn {
+      padding: 1em 2em;
+      font-size: 22px;
+      margin: 3em;
+      font-weight: bolder;
+      color: black;
+      background: lightgreen;
+      border: 1px solid black;
+      border-radius: 10px;
+      outline: none;
+  }

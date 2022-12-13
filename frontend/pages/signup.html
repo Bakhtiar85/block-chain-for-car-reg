@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Login to the system</title>
+	<link rel="stylesheet" href="../assets/css/home.css">
+	<link rel="stylesheet" href="../assets/css/style.css">
+
+	<!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script> -->
+	<!-- above 1 line(s) will be used for ethirium  -->
+</head>
+
+<body>
+
+	<div id="root">
+
+		<div id="header" class="w-full fixed z-[99] top-0">
+			<div id="header-lg"
+				class="md:w-10/12 mx-auto navbar h-24 flex justify-between items-center px-4 text-white text-2xl">
+				<div id="logo-img">
+					<a href="/index.html"><img src="../assets/imgs/Logo.svg" width="44" alt="logo-img" class="logo"></a>
+				</div>
+				<div id="nav-bar" class="lg:w-8/12 lg:float-right lg:relative absolute h-full w-full left-0 top-0">
+					<ul
+						class="hidden lg:flex h-full flex lg:flex-row flex-col gap-[34px] lg:justify-end items-center justify-center w-full">
+						<li id="homeBtn">
+							<a href="../index.html">
+								<p>Home</p>
+							</a>
+						</li>
+						<li id="aboutBtn">
+							<a href="../index.html#about">
+								<p>About</p>
+							</a>
+						</li>
+						<li id="resourcesBtn">
+							<a href="../index.html#resources">
+								<p>Resources</p>
+							</a>
+						</li>
+						<li class="flex items-center gap-[14px]">
+							<a href="./signIn.html" class="button">
+								Login
+							</a>
+							<a href="#" class="button">
+								Register
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div id="hamburger" onclick="toggleMobBar()" class="md:hidden lg:w-0 w-8/12 text-right z-10">
+					<span id="hamburger">Hamburger</span>
+					<span id="cross" class="hidden">Cross</span>
+				</div>
+				<div id="mob-bar"
+					class='md:hidden fixed left-0 top-0 w-full h-full border-r border-r-gray-900 bg-black ease-in-out duration-500'>
+					<div id="logo-img" class="w-44 m-[27px] ml-[17px]">
+						<a href="/index.html"><img src="../assets/imgs/Logo.svg" width="44" alt="logo-img" class="logo"></a>
+					</div>
+					<ul class="flex flex-col gap-5">
+						<li>
+							<a href="../index.html">
+								<p>Home</p>
+							</a>
+						</li>
+						<li>
+							<a href="../index.html#about">
+								<p>About</p>
+							</a>
+						</li>
+						<li>
+							<a href="../index.html#resources">
+								<p>Resources</p>
+							</a>
+						</li>
+						<li class="flex items-center gap-[14px]">
+							<a href="./signIn.html" class="button">
+								Login
+							</a>
+							<a href="#" class="button">
+								Register
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<hr class="mt-[10px] shadow-border">
+		</div>
+
+		<div id="content-container" class="w-full">
+			<div class='text-white bg-gray-800 py-[5rem] m-auto flex flex-col justify-center items-center'>
+				<div id="sign-in" class="max-w-[1200px] w-full grid md:grid-cols-2 gap-4">
+
+					<div id="side-note" class="w-10/12 flex flex-col justify-center">
+						<p class="h4">
+							Find Vehicles Good for you
+						</p>
+
+						<p class="subtitle text-justify">
+							We have thousands of automobiles registered under the system of blockchain technology which
+							provides
+							<br><b> TRUST and SECURITY </b>
+						</p>
+					</div>
+
+					<div class="">
+						<div class="login-container">
+							<img src="../assets/imgs/autox-signup.svg" alt="Login Logo" class="login-logo">
+						</div>
+
+						<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+							onSubmit="App.createUser(); return false;">
+							<div class="flex flex-wrap -mx-3 mb-4">
+								<div class="w-full md:w-1/2 px-3">
+									<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+										for="grid-full-name">
+										Full Name
+									</label>
+									<input required
+										class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+										id="grid-full-name" type="text" placeholder="Alan Doe" />
+								</div>
+								<div class="w-full md:w-1/2 px-3">
+									<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+										for="grid-u-nic">
+										Your CNIC
+									</label>
+									<input required data-inputmask="'mask': '99999-9999999-9'"
+										placeholder="XXXXX-XXXXXXX-X"
+										class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+										id="grid-u-nic" type="text" />
+								</div>
+							</div>
+							<div class="flex flex-wrap -mx-3 mb-4">
+								<div class="w-full md:w-1/2 px-3">
+									<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+										for="grid-u-address">
+										Address
+									</label>
+									<input required
+										class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+										id="grid-u-address" type="text" placeholder="Address" />
+								</div>
+								<div class="w-full md:w-1/2 px-3">
+									<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+										for="grid-u-contact">
+										Phone Number
+									</label>
+									<input required data-inputmask="'mask': '0399-9999999'"
+										class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+										id="grid-u-contact" type="text" placeholder="XXXX-XXXXXXX" />
+								</div>
+							</div>
+							<div class="flex flex-wrap -mx-3 mb-4">
+								<div class="w-full md:w-1/2 px-3">
+									<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1" maxlength="12"
+										for="grid-password">
+										Password
+									</label>
+									<input required
+										class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+										id="grid-password" type="password" placeholder="******************" />
+								</div>
+								<div class="w-full md:w-1/2 px-3">
+									<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1" maxlength="12"
+										for="grid-password-again">
+										Re: Password
+									</label>
+									<input required
+										class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+										id="grid-password-again" type="password" placeholder="******************" />
+								</div>
+							</div>
+							<div class="flex justify-around items-center -mx-3">
+								<p class="text-center bottom-[-30px] text-gray-600 text-xs italic">Password must contain
+									upper, lower, special, <br /> numerical and must be almost 10 - 12 Characters long</p>
+								<button id="signup-btn" type="submit" disabled
+									class='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>Sign
+									Up</button>
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+
+			<div class='w-full h-[1rem]'>
+				<div class="mx-auto max-w-[1240px] pt-[2rem] px-4 grid md:grid-cols-4 gap-8 text-gray-300">
+					<div class='col-span-3'>
+						<img src='../assets/imgs/Logo.svg' alt="logo" class='w-44' />
+						<p class="text-2xl font-mono font-bold text-gray-300">
+							Abstract
+						</p>
+						<p class="font-medium text-lg">
+							The system Block-Chain for vehicle registration handles the processes related to car
+							registration for example, registering a vehicle to the government database
+							<i>Block-Chain</i> and transfer the vehicle ownership.
+						</p>
+						<div class="flex text-white md:w-[45%] justify-between my-4">
+							<!-- <a href="#"><FiLinkedin size={32} /></a>
+							<a href="#"><SiFiverr size={42} /></a>
+							<a href="#"><SiUpwork size={32} /></a>
+							<a href="#"><AiFillFileWord size={32} /></a>
+							<a href="#"><BsLink45Deg size={32} /></a> -->
+						</div>
+					</div>
+					<div class=''>
+						<div>
+							<p class="text-2xl font-mono font-bold text-gray-300">
+								Solutions
+							</p>
+							<ul>
+								<li class='py-2 text-xl'>Decentralized</li>
+								<li class='py-2 text-xl'>Contracts and Concensues</li>
+								<li class='py-2 text-xl'>P2P Network</li>
+								<li class='py-2 text-xl font-mono font-bold text-gray-300'>Block-Chain</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- jquery cdn -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- tailwind css -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<!-- bundel for input fields masking -->
+	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+	<!-- required plugins -->
+	<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
+	<script src="/node_modules/truffle-contract/dist/truffle-contract.js"></script>
+	
+	<!-- custom JS -->
+	<script src="../assets/js/app.js"></script>
+
+	<script>
+		function toggleMobBar() {
+			if ($('#hamburger > span#hamburger').is(':visible')) {
+				$('#mob-bar').css('display', 'block');
+				$('#hamburger > span#hamburger').addClass('hidden');
+				$('#hamburger > span#cross').removeClass('hidden');
+			} else {
+				$('#mob-bar').css('display', 'none');
+				$('#hamburger > span#hamburger').removeClass('hidden');
+				$('#hamburger > span#cross').addClass('hidden');
+			}
+		}
+		$('#grid-password').on('keyup',function () {
+			var regex = /^(?!.*\s)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]).{10,12}$/;
+			if(regex.test($('#grid-password').val())){
+				$('#grid-password').css('border', '1mm solid green')
+			}
+		})
+		$('#grid-password-again').on('keyup',function () {
+			var regex = /^(?!.*\s)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]).{10,12}$/;
+			if($('#grid-password').val() == $('#grid-password-again').val()){
+				$('#grid-password-again').css('border', '1mm solid green')
+				$('#signup-btn').prop( "disabled", false );
+			}
+		})
+		$(":input").inputmask();
+	</script>
+
+</body>
+
+</html>

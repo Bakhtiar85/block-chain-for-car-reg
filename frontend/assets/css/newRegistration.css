@@ -1,0 +1,20 @@
+.form {
+    margin: 0 2em;
+}
+
+.form input {
+    padding: .7em;
+    font-size: 16px;
+    margin: 10px;
+    width: 450px;
+}
+
+.new-reg {
+    padding: .7em 1em;
+    background: seagreen;
+    font-size: 18px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 1px solid black;
+    margin: 1em;
+}

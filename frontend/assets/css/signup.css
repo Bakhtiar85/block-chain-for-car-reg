@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat';
+    background: url('../assets/LoginBG.png');
+    color: white;
+    background-size: cover;
+}
+
+.main-container {
+    margin: 2em;
+    text-align: center;
+}
+
+.logo {
+    width: 200px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 3em 5em;
+}
+
+.side-note {
+    text-align: left;
+    margin: auto 7em;
+    width: 50%;
+}
+
+.focus {
+    color: red;
+}
+
+.data-container {
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 2em 5em;
+    width: 20%;
+    text-align: left;
+}
+
+.login-logo {
+    margin: auto auto 2em;
+    text-align: center;
+}
+
+.login-container {
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+    color: black;
+}
+
+input {
+    padding: .5em;
+    width: 200px;
+    margin: 1em;
+    outline: none;
+}
+
+button {
+    padding: 1em 2em;
+    margin: 2em;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+
+.signup-btn {
+    background-color: red;
+}
+
+.login-btn {
+    padding: 1em 2em;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.login-btn:hover {
+    text-decoration: underline;
+}

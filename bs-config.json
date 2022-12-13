@@ -1,11 +1,10 @@
 {
     "server": {
         "baseDir": [
-            "./src",
+            "./frontend",
             "./build/contracts"
         ],
         "routes": {
-            "/assets": "./frontend/assets",
             "/vendor": "./node_modules"
         }
     }
