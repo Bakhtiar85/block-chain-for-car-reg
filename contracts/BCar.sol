@@ -21,6 +21,14 @@ contract BCar {
         Friend[] friendList;
     }
 
+    // ALL USERS
+    uint256 userCounts = 0;
+    struct AllUsers {
+        uint256 u_count;
+        uint256 user_nic;
+    }
+    mapping(uint256 => AllUsers) public allUsers;
+
     //  event is a log creates on trigger.
     event userSignedUp(string _nam, uint256 _nic, string u_cont, string u_pass);
     event LogoutUser(bool isUserLoggedIn);
@@ -42,6 +50,9 @@ contract BCar {
         userList[_nic].u_address = _addr;
         userList[_nic].u_password = _pass;
         userList[_nic].isLoggedIn = true;
+
+        userCounts++;
+        allUsers[userCounts] = AllUsers(userCounts, _nic);
 
         emit userSignedUp(_nam, _nic, _cont, _pass);
 
@@ -65,7 +76,17 @@ contract BCar {
         return userList[_nic].isLoggedIn = false;
     }
 
-    function getUserInfo(uint256 _nic) public view returns (uint256, string memory, string memory, string memory,bool) {
+    function getUserInfo(uint256 _nic)
+        public
+        view
+        returns (
+            uint256,
+            string memory,
+            string memory,
+            string memory,
+            bool
+        )
+    {
         require(isUserExist(_nic), "User does not exists!");
         return (
             userList[_nic].u_nic,
@@ -73,7 +94,7 @@ contract BCar {
             userList[_nic].u_contact,
             userList[_nic].u_address,
             userList[_nic].isLoggedIn
-            );
+        );
     }
 
     function getFriendsList(uint256 _nic)
@@ -107,7 +128,10 @@ contract BCar {
         string calldata f_name
     ) external {
         require(isLoggedIn(_nic), "You Need To Log In First!");
-        require(isUserExist(f_nic), "Your Firend Does Not Registered With The System!");
+        require(
+            isUserExist(f_nic),
+            "Your Firend Does Not Registered With The System!"
+        );
         require(_nic != f_nic, "User cannot add him/her self as friend!");
         require(
             areFriends(_nic, f_nic) == false,
@@ -212,13 +236,21 @@ contract BCar {
     }
 
     /**
-    *? Vehicles => :addNewVehicle /, :isVehicleRegistered /, :getVehicleInfo /, :_addVehicle /
-    * *_addVehicle is used to link vehicle with user
-    *! vehilce will be tracked through engin no. 
-    *! I have been triying to track a vehicle both on its engin and vehicle no. But don't know why code was misbehaving. 
+     *? Vehicles => :addNewVehicle /, :isVehicleRegistered /, :getVehicleInfo /, :_addVehicle /
+     * *_addVehicle is used to link vehicle with user
+     *! vehilce will be tracked through engin no.
+     *! I have been triying to track a vehicle both on its engin and vehicle no. But don't know why code was misbehaving.
      */
 
-    struct Vehicle{
+    // ALL VEHICLES
+    uint256 vehiclesCounts = 0;
+    struct AllVehicles {
+        uint256 v_count;
+        string v_e_no;
+    }
+    mapping(uint256 => AllVehicles) public allVehicles;
+
+    struct Vehicle {
         string e_no;
         string v_no;
         string company;
@@ -230,12 +262,27 @@ contract BCar {
 
     mapping(string => Vehicle) public vehicleList;
 
-    event newVehicleAdded(string e_no, string v_no, string company, string modal, string year, uint256 owner_id, bool reg_with_owner);
-    
-    function addNewVehicle(uint256 _nic, string memory e_no, string memory v_no, string memory company, string memory modal, string memory year) public returns(bool){
+    event newVehicleAdded(
+        string e_no,
+        string v_no,
+        string company,
+        string modal,
+        string year,
+        uint256 owner_id,
+        bool reg_with_owner
+    );
+
+    function addNewVehicle(
+        uint256 _nic,
+        string memory e_no,
+        string memory v_no,
+        string memory company,
+        string memory modal,
+        string memory year
+    ) public returns (bool) {
         require(isLoggedIn(_nic), "You Need To Log In First!");
         require(!isVehicleRegistered(e_no), "Vehicle Already Rdgistered");
-  
+
         vehicleList[e_no].e_no = e_no;
         vehicleList[e_no].v_no = v_no;
         vehicleList[e_no].company = company;
@@ -244,15 +291,28 @@ contract BCar {
         vehicleList[e_no].owner_id = _nic;
         vehicleList[e_no].reg_with_owner = true;
 
-        
+        vehiclesCounts++;
+        allVehicles[vehiclesCounts] = AllVehicles(vehiclesCounts, e_no);
+
         emit newVehicleAdded(e_no, v_no, company, modal, year, _nic, true);
         _addVehicle(_nic, e_no);
 
         return true;
-
     }
 
-    function getVehicleInfo(string memory e_no) public view returns (string memory, string memory, string memory, string memory, string memory, uint256, bool) {
+    function getVehicleInfo(string memory e_no)
+        public
+        view
+        returns (
+            string memory,
+            string memory,
+            string memory,
+            string memory,
+            string memory,
+            uint256,
+            bool
+        )
+    {
         require(isVehicleRegistered(e_no), "Vehicle is not Registered");
         return (
             vehicleList[e_no].e_no,
@@ -267,7 +327,7 @@ contract BCar {
 
     /**
      *? userVehicles functions =>  :_addVehicle /, :getUserVehicles /, :transferVehicle /
-     ** _addVehicle is a helper funtion to add vehilce to the user. 
+     ** _addVehicle is a helper funtion to add vehilce to the user.
      */
 
     struct UserVehicles {
@@ -275,37 +335,59 @@ contract BCar {
         Vehicle[] vehicles_data;
     }
 
-    mapping (uint256=>UserVehicles) public userVehicles;
+    mapping(uint256 => UserVehicles) public userVehicles;
 
     function _addVehicle(uint256 _nic, string memory e_no) public {
         userVehicles[_nic].vehicles_data.push(vehicleList[e_no]);
     }
 
-    function getUserVehicles(uint256 _nic) external view returns (Vehicle[] memory){
+    function getUserVehicles(uint256 _nic)
+        external
+        view
+        returns (Vehicle[] memory)
+    {
         require(isLoggedIn(_nic), "You Need To Log In First!");
 
         return userVehicles[_nic].vehicles_data;
     }
 
-    function transferVehicle(uint256 _nic, uint256 n_nic, string memory e_no) public {
+    function transferVehicle(
+        uint256 _nic,
+        uint256 n_nic,
+        string memory e_no
+    ) public {
         require(isLoggedIn(_nic), "You Need To Log In First!");
-        require(_nic != n_nic, "User cannot transfer the vehicle data on his/her account!");
+        require(
+            _nic != n_nic,
+            "User cannot transfer the vehicle data on his/her account!"
+        );
         require(isUserExist(n_nic), "Other User Is Not Registered!");
-        require(isVehicleRegistered(e_no), "Vehicle You Are Trying To Transfer is Not Registered!");
-        require(isVehicleRegisteredWithTheUser(e_no, _nic), "Vehicle You Are Trying To Transfer is Not Registered With You!");
+        require(
+            isVehicleRegistered(e_no),
+            "Vehicle You Are Trying To Transfer is Not Registered!"
+        );
+        require(
+            isVehicleRegisteredWithTheUser(e_no, _nic),
+            "Vehicle You Are Trying To Transfer is Not Registered With You!"
+        );
 
         // complex code
-        // on following line vehicle will be transfered to new user. 
+        // on following line vehicle will be transfered to new user.
         _addVehicle(n_nic, e_no);
         // turn current user's status to false
         for (uint256 i = 0; i < userVehicles[_nic].vehicles_data.length; i++) {
-            if(keccak256(abi.encodePacked(userVehicles[_nic].vehicles_data[i].e_no)) == keccak256(abi.encodePacked(e_no)) && userVehicles[_nic].vehicles_data[i].reg_with_owner == true){
+            if (
+                keccak256(
+                    abi.encodePacked(userVehicles[_nic].vehicles_data[i].e_no)
+                ) ==
+                keccak256(abi.encodePacked(e_no)) &&
+                userVehicles[_nic].vehicles_data[i].reg_with_owner == true
+            ) {
                 userVehicles[_nic].vehicles_data[i].reg_with_owner = false;
                 vehicleList[e_no].owner_id = n_nic;
                 break;
             }
         }
-        
     }
 
     /**
@@ -320,12 +402,19 @@ contract BCar {
         return userList[_nic].isLoggedIn;
     }
 
-    function isVehicleRegistered(string memory e_no) public view returns (bool) {
+    function isVehicleRegistered(string memory e_no)
+        public
+        view
+        returns (bool)
+    {
         return vehicleList[e_no].reg_with_owner;
     }
 
-    function isVehicleRegisteredWithTheUser(string memory e_no, uint256 _nic) public view returns (bool) {
+    function isVehicleRegisteredWithTheUser(string memory e_no, uint256 _nic)
+        public
+        view
+        returns (bool)
+    {
         return vehicleList[e_no].owner_id == _nic;
     }
-    
 }

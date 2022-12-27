@@ -1,3 +1,7 @@
+/**
+ * ! in try catch after rejecting metamask, show user the reason of which he faild to achive the function
+ */
+
 App = {
     loading: false,
     contracts: {},
@@ -159,12 +163,12 @@ App = {
         var user_id = localStorage.getItem('userId');
         var u_vehicles = $('table#u_vehicles tbody');
         var vehicle_option = $('#vehicles_select');
-        var text_class = 'text-red-300';
         if (user_id) {
             const userVehicles = await App.bCar.getUserVehicles(user_id);
             
             userVehicles.forEach(async (element, count) => {
-                console.log(element);
+                // console.log(element);
+                var text_class = 'text-red-400';
 
                 var e_no = element['e_no'];
                 var v_no = element['v_no'];
@@ -177,7 +181,7 @@ App = {
                     text_class = '';
                 }
                 
-                var v_tr = "<tr class="+text_class+"><th  scope = 'row' >" + ++count + "</th><td>" + v_no + "</td><td>" + e_no + "</td><td>" + company + "</td><td>" + model + "</td><td>" + year + "</td></tr>";
+                var v_tr = "<tr class="+ text_class +"><th  scope = 'row' >" + ++count + "</th><td>" + v_no + "</td><td>" + e_no + "</td><td>" + company + "</td><td>" + model + "</td><td>" + year + "</td></tr>";
                 u_vehicles.append(v_tr);
                 
             });
