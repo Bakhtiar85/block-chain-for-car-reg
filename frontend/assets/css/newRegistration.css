@@ -1,5 +1,5 @@
 .form {
-    margin: 0 2em;
+    margin: 0 0 0 2em;
 }
 
 .form input {
@@ -17,4 +17,15 @@
     font-weight: bold;
     border: 1px solid black;
     margin: 1em;
+}
+
+@media screen and (max-width: 600px) {
+    .form {
+        margin: 0;
+    }
+
+    .form input {
+        margin: 2px;
+        width: 100%;
+    }
 }

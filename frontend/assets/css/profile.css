@@ -10,7 +10,7 @@ body {
 
 .header-area {
     background: url("../imgs/hero-image.png");
-    height: 91vh;
+    /* height: 91vh; */
     background-size: cover;
 }
 
@@ -101,3 +101,10 @@ table.customTable {
       border-radius: 10px;
       outline: none;
   }
+
+@media screen and (max-width: 600px) {
+    .about-btn {
+        padding: 0.5em 1em;
+        margin: 1em;
+    }
+}

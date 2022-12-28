@@ -227,4 +227,15 @@ button {
     color: black;
 }
 
+
+
+@media screen and (max-width: 600px) {
+    .footer-area {
+        padding: 1em 0.5em;
+    }
+    .footer-area p{
+        font-size: 12px;
+    }
+}
+
 /* footer styling ends */
