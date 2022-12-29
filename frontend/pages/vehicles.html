@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome To AutoX</title>
+    <link rel="stylesheet" href="../assets/css/home.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script> -->
+    <!-- above 1 line(s) will be used for ethirium  -->
+</head>
+
+<body>
+
+    <div id="root">
+
+        <div id="header" class="w-full h-[65px]">
+            <div id="header-lg" class="flex items-center mx-[33px] pt-[13px]">
+                <div class="w-4/12">
+                    <div id="logo-img">
+                        <a href="/index.html"><img src="../assets/imgs/Logo.svg" width="165" alt="logo-img" class="logo"></a>
+                    </div>
+                </div>
+                <div id="nav-bar" class="lg:w-8/12 lg:float-right lg:relative absolute h-full w-full left-0 top-0">
+                    <ul
+                        class="h-full flex lg:flex-row flex-col gap-[34px] lg:justify-end items-center justify-center w-full">
+                        <li>
+                            <a href="./profile.html">
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <p>Vehicles</p>
+                        </li> -->
+                        <li class="active">
+                            <p>Vehicles</p>
+                        </li>
+                        <li>
+                            <a href="./newRegistration.html">
+                                <p>Register New Vehicle</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./transferVehicle.html"><p>Transfer Vehicle</p></a>
+                        </li>
+                        <li class="flex items-center gap-[14px]">
+                            <Button class="btn btn-circle user_id">
+                                
+                            </Button>
+                            <Button onclick="App.logoutUser()">
+                                Logout
+                            </Button>
+                            <!-- <p id="icon-cirlce" class="bg-[#5034b8] text-white">P</p>
+                            <p class="triangle-down"></p> -->
+                        </li>
+                    </ul>
+                </div>
+                <div id="hamburger" class="lg:hidden lg:w-0 w-8/12 text-right">
+                    icon
+                </div>
+            </div>
+            <hr class="mt-[10px] shadow-border">
+        </div>
+
+
+        <div id="content-container" style="margin-top: initial;" class="w-10/12 h-[80vh] flex flex-col justify-center">
+
+            <div id="vehicle-in-record" class="w-full my-0 mx-auto">
+                <div class="div-head border-b-2">
+                    <p class="h3">Vehicles in Record</p>
+                </div>
+                <div class="div-content">
+                    <table id="u_vehicles" class="w-full mt-4">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Vehicle NO</th>
+                                <th>Engine NO</th>
+                                <th>Company</th>
+                                <th>Modal / Vehicle Type</th>
+                                <th>Year</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-area fixed bottom-0 w-full">
+            <p>
+                This is the footer area. It will contain the Quick Links and Social Links.
+                <strong>Copyright &copy; 2022.</strong> All Rights Reserved by the Developer.
+            </p>
+        </div>
+        <button style="display: none;" onclick="App.getUserVehicles()">get user info</button>
+    </div>
+
+    <!-- jquery cdn -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script> -->
+    <script src="../assets/js/jquery_cdn.js"></script>
+    <!-- tailwind css -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- required plugins -->
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
+    <script src="/node_modules/truffle-contract/dist/truffle-contract.js"></script>
+
+    <!-- custom JS -->
+    <script src="../assets/js/app.js"></script>
+
+    <script>
+        var hamburger = 1;
+        $('#hamburger').on('click', function () {
+            alert(hamburger)
+            if (hamburger == 1) {
+                hamburger = 0;
+                // $('#nav-bar').removeClass('hidden')
+            } else if (hamburger == 0) {
+                hamburger = 1;
+                // $('#nav-bar').addClass('hidden')
+            }
+        })
+        
+    </script>
+
+</body>
+
+</html>

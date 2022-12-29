@@ -8,7 +8,7 @@ contract BCar {
 
     // Chat Module /, Vehicle Moduel
     /**
-     *? User=> :SignUp /, :LogIn/, :LogOut /, :getFriendsList /
+     *? User=> :SignUp /, :LogIn/, :LogOut /, :getUserInfo, :getFriendsList /
      */
 
     struct User {
@@ -20,6 +20,14 @@ contract BCar {
         bool isLoggedIn;
         Friend[] friendList;
     }
+
+    // ALL USERS
+    uint256 userCounts = 0;
+    struct AllUsers {
+        uint256 u_count;
+        uint256 user_nic;
+    }
+    mapping(uint256 => AllUsers) public allUsers;
 
     //  event is a log creates on trigger.
     event userSignedUp(string _nam, uint256 _nic, string u_cont, string u_pass);
@@ -43,6 +51,9 @@ contract BCar {
         userList[_nic].u_password = _pass;
         userList[_nic].isLoggedIn = true;
 
+        userCounts++;
+        allUsers[userCounts] = AllUsers(userCounts, _nic);
+
         emit userSignedUp(_nam, _nic, _cont, _pass);
 
         return true;
@@ -63,6 +74,27 @@ contract BCar {
         require(isLoggedIn(_nic), "You Need To Log In First!");
         emit LogoutUser(false);
         return userList[_nic].isLoggedIn = false;
+    }
+
+    function getUserInfo(uint256 _nic)
+        public
+        view
+        returns (
+            uint256,
+            string memory,
+            string memory,
+            string memory,
+            bool
+        )
+    {
+        require(isUserExist(_nic), "User does not exists!");
+        return (
+            userList[_nic].u_nic,
+            userList[_nic].u_name,
+            userList[_nic].u_contact,
+            userList[_nic].u_address,
+            userList[_nic].isLoggedIn
+        );
     }
 
     function getFriendsList(uint256 _nic)
@@ -210,6 +242,14 @@ contract BCar {
      *! I have been triying to track a vehicle both on its engin and vehicle no. But don't know why code was misbehaving.
      */
 
+    // ALL VEHICLES
+    uint256 vehiclesCounts = 0;
+    struct AllVehicles {
+        uint256 v_count;
+        string v_e_no;
+    }
+    mapping(uint256 => AllVehicles) public allVehicles;
+
     struct Vehicle {
         string e_no;
         string v_no;
@@ -250,6 +290,9 @@ contract BCar {
         vehicleList[e_no].year = year;
         vehicleList[e_no].owner_id = _nic;
         vehicleList[e_no].reg_with_owner = true;
+
+        vehiclesCounts++;
+        allVehicles[vehiclesCounts] = AllVehicles(vehiclesCounts, e_no);
 
         emit newVehicleAdded(e_no, v_no, company, modal, year, _nic, true);
         _addVehicle(_nic, e_no);

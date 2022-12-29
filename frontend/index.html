@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Welcome</title>
+	<link rel="stylesheet" href="assets/css/home.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+	<div id="root">
+
+		<div id="header" class="w-full fixed z-[99] top-0">
+			<div id="header-lg"
+				class="md:w-10/12 mx-auto navbar h-24 flex justify-between items-center px-4 text-white text-2xl">
+				<div id="logo-img">
+					<a href="/index.html"><img src="assets/imgs/Logo.svg" width="44" alt="logo-img" class="logo"></a>
+				</div>
+				<div id="nav-bar" class="lg:w-8/12 lg:float-right lg:relative absolute h-full w-full left-0 top-0">
+					<ul
+						class="hidden lg:flex h-full flex lg:flex-row flex-col gap-[34px] lg:justify-end items-center justify-center w-full">
+						<li class="active" id="homeBtn">
+							<a>
+								<p>Home</p>
+							</a>
+						</li>
+						<li id="aboutBtn">
+							<a>
+								<p>About</p>
+							</a>
+						</li>
+						<li id="resourcesBtn">
+							<a>
+								<p>Resources</p>
+							</a>
+						</li>
+						<li class="flex items-center gap-[14px]">
+							<a href="./pages/signIn.html" class="button">
+								Login
+							</a>
+							<a href="./pages/signup.html" class="button">
+								Register
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div id="hamburger" onclick="toggleMobBar()" class="md:hidden lg:w-0 w-8/12 text-right z-10">
+					<span id="hamburger"><svg class="w-10 h-10 float-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M21 18H3V16H21V18ZM21 13H3V11H21V13ZM21 8H3V6H21V8Z" fill="currentColor"></path></svg></span>
+					<span id="cross" class="hidden"><svg class="w-10 h-10 float-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"></path></svg></span>
+				</div>
+				<div id="mob-bar"
+					class='md:hidden fixed left-0 top-0 w-full h-full border-r border-r-gray-900 bg-black ease-in-out duration-500'>
+					<div id="logo-img" class="w-44 m-[27px] ml-[17px]">
+						<a href="/index.html"><img src="assets/imgs/Logo.svg" width="44" alt="logo-img" class="logo"></a>
+					</div>
+					<ul class="flex flex-col gap-5 mx-4">
+						<li class="active">
+							<p>Home</p>
+						</li>
+						<li>
+							<p>About</p>
+						</li>
+						<li>
+							<p>Resources</p>
+						</li>
+						<li class="flex items-center gap-[14px]">
+							<a href="./pages/signIn.html" class="button">
+								Login
+							</a>
+							<a href="./pages/signup.html" class="button">
+								Register
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<hr class="mt-[10px] shadow-border">
+		</div>
+
+		<div id="content-container" class="w-full">
+			<div id='home' class='text-white bg-gray-800 h-screen'>
+				<div
+					class="max-w-[800px] mt-[-96px] w-full h-screen mx-auto flex flex-col text-center justify-center items-center">
+					<p class='text-[#00df91] text-2xl uppercase font-bold p-2'>
+						Grow With Block-Chain.
+					</p>
+					<p class='lg:text-6xl md:text-4xl text-2xl font-bold'>
+						Fast and Flexible with <br />
+						/ <i class="text-[28px]"> Decentralized, Distributed, P2P network </i>/
+					</p>
+					<p class='md:text-5xl sm:text-4xl text-xl font-bold md:py-4'>
+						Reliable and Trustworthy.
+					</p>
+					<a href='https://makhdoomabubakar.makhdumenterprises.com' target="_blank"
+						class='md:text-2xl text-xl font-mono border-2 text-white max-w-fit md:p-4 p-6 mt-4 hover:p-6 hover:bg-gray-500 hover:duration-300 rounded-md'>
+						More About Block-Chain
+					</a>
+				</div>
+			</div>
+
+			<div id='about' class='w-full bg-gray-600 py-15 px-4 md:h-screen h-full flex items-center py-8'>
+				<div class='max-w-[1240px] mx-auto'>
+
+					<div class="grid md:grid-cols-2">
+						<div>
+							<img class='w-[350px] mx-auto my-4' src='assets/imgs/img1.webp' alt="img1" />
+						</div>
+						<div class='flex flex-col justify-center '>
+							<p class='text[#00df9a] text-3xl font-bold font-mono'>Faster then Ever</p>
+							<p>Don't need to Wait for paper work. Time is in your Hand.</p>
+							<p class='sm:text-2xl text-xl font-bold py-2'>System will take care for the rest!</p>
+							<a href="#"
+								class='text-xl font-mono bg-black text-white max-w-fit p-2 mt-4 hover:p-4 hover:bg-gray-500 hover:duration-300 rounded-md'>
+								Buy / Sell
+							</a>
+						</div>
+					</div>
+
+					<div class="grid md:grid-cols-2">
+						<div>
+							<img class='w-[350px] mx-auto my-4 md:float-right' src='assets/imgs/img2.webp'
+								alt="img2" />
+						</div>
+						<div class='flex flex-col justify-center md:order-first'>
+							<p class='text[#00df9a] text-3xl font-bold font-mono'>Decentralized and Distributed</p>
+							<p>All the details will be available to the RTO.</p>
+							<p class='sm:text-2xl text-xl font-bold py-2'>Peer to Peer Network!</p>
+							<a href="#"
+								class='text-xl font-mono bg-black text-white max-w-fit p-2 mt-4 hover:p-4 hover:bg-gray-500 hover:duration-300 rounded-md'>
+								Read More
+							</a>
+						</div>
+					</div>
+
+					<div class="grid md:grid-cols-2">
+						<div>
+							<img class='w-[350px] mx-auto my-4' src='assets/imgs/img3.jpg' alt="img3" />
+						</div>
+						<div class='flex flex-col justify-center '>
+							<p class='text[#00df9a] text-3xl font-bold font-mono'>Secure and Trusted</p>
+							<p>You are the security. Blockchain take cares for any doubt.</p>
+							<p class='sm:text-2xl text-xl font-bold py-2'>Secured and Trustworthy!</p>
+							<a href="#"
+								class='text-xl font-mono bg-black text-white max-w-fit p-2 mt-4 hover:p-4 hover:bg-gray-500 hover:duration-300 rounded-md'>
+								Vehicles in System
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div id="resources"
+				class='w-full md:h-screen h-full flex items-center justify-center bg-gray-500 text-black'>
+				<div class='w-8/12 grid md:grid-cols-3 gap-4'>
+
+					<div class="max-w-lg bg-white border border-gray-200 rounded-lg shadow-md  ">
+						<a href="#">
+							<img class="rounded-t-lg" src='assets/imgs/rimg1.webp' alt="img1" />
+						</a>
+						<div class="p-5">
+							<a href="#">
+								<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">Tools used in the
+									Project</h5>
+							</a>
+							<p class="mb-3 font-normal text-gray-700 ">
+								<li>Windows 10</li>
+								<li>VS Code</li>
+								<li>Adobe Xd</li>
+								<li>Ganache</li>
+							</p>
+							<a
+								class="inline-flex items-center px-3 py-2 text-sm font-medium text-center bg-gray-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 mt-4 text-white">
+								Read more
+								<svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
+									viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+									<path fillRule="evenodd"
+										d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+										clipRule="evenodd"></path>
+								</svg>
+							</a>
+						</div>
+					</div>
+
+					<div class="max-w-lg bg-white border border-gray-200 rounded-lg shadow-md  ">
+						<a href="#">
+							<img class="rounded-t-lg" src='assets/imgs/rimg2.webp' alt="img1" />
+						</a>
+						<div class="p-5">
+							<a href="#">
+								<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">Languages and Techs
+								</h5>
+							</a>
+							<p class="mb-3 font-normal text-gray-700 ">
+								<li>HTML, CSS, Tailwind CSS</li>
+								<li>JS, jQuery</li>
+								<li>Solidity</li>
+								<li>Ethereum</li>
+							</p>
+							<a
+								class="inline-flex items-center px-3 py-2 text-sm font-medium text-center bg-gray-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 mt-4 text-white">
+								Read more
+								<svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
+									viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+									<path fillRule="evenodd"
+										d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+										clipRule="evenodd"></path>
+								</svg>
+							</a>
+						</div>
+					</div>
+
+					<div class="max-w-lg bg-white border border-gray-200 rounded-lg shadow-md  ">
+						<a href="#">
+							<img class="rounded-t-lg" src='assets/imgs/rimg3.webp' alt="img1" />
+						</a>
+						<div class="p-5">
+							<a href="#">
+								<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">Research and Refrences
+								</h5>
+							</a>
+							<p class="mb-3 font-normal ">
+								<li>1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+							</p>
+							<a href="#"
+								class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 mt-4">
+								Read more
+								<svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
+									viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+									<path fillRule="evenodd"
+										d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+										clipRule="evenodd"></path>
+								</svg>
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class='w-full h-24px'>
+				<div class="mx-auto max-w-[1240px] py-16 px-4 grid md:grid-cols-4 gap-8 text-gray-300">
+					<div class='col-span-3'>
+						<img src='assets/imgs/Logo.svg' alt="logo" class='w-44' />
+						<p class="text-2xl font-mono font-bold text-gray-300">
+							Abstract
+						</p>
+						<p class="font-medium text-lg">
+							The system Block-Chain for vehicle registration handles the processes related to car
+							registration for example, registering a vehicle to the government database
+							<i>Block-Chain</i> and transfer the vehicle ownership.
+						</p>
+						<div class="flex text-white md:w-[45%] justify-between my-4">
+							<!-- <a href="#"><FiLinkedin size={32} /></a>
+							<a href="#"><SiFiverr size={42} /></a>
+							<a href="#"><SiUpwork size={32} /></a>
+							<a href="#"><AiFillFileWord size={32} /></a>
+							<a href="#"><BsLink45Deg size={32} /></a> -->
+						</div>
+					</div>
+					<div class=''>
+						<div>
+							<p class="text-2xl font-mono font-bold text-gray-300">
+								Solutions
+							</p>
+							<ul>
+								<li class='py-2 text-xl'>Decentralized</li>
+								<li class='py-2 text-xl'>Contracts and Concensues</li>
+								<li class='py-2 text-xl'>P2P Network</li>
+								<li class='py-2 text-xl font-mono font-bold text-gray-300'>Block-Chain</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- jquery cdn -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<!-- tailwind css -->
+	<script src="https://cdn.tailwindcss.com"></script>
+
+	<script>
+		function toggleMobBar() {
+			if ($('#hamburger > span#hamburger').is(':visible')) {
+				$('#mob-bar').css('display', 'block');
+				$('#hamburger > span#hamburger').addClass('hidden');
+				$('#hamburger > span#cross').removeClass('hidden');
+			} else {
+				$('#mob-bar').css('display', 'none');
+				$('#hamburger > span#hamburger').removeClass('hidden');
+				$('#hamburger > span#cross').addClass('hidden');
+			}
+		}
+
+		$("#homeBtn").click(function () {
+			$("#resourcesBtn").removeClass('active');
+			$("#aboutBtn").removeClass('active');
+			$("#homeBtn").addClass('active');
+			$('html, body').animate({
+				scrollTop: $("#home").offset().top
+			}, 2000);
+		});
+
+		$("#aboutBtn").click(function () {
+			$("#homeBtn").removeClass('active');
+			$("#resourcesBtn").removeClass('active');
+			$("#aboutBtn").addClass('active');
+			$('html, body').animate({
+				scrollTop: $("#about").offset().top
+			}, 2000);
+		});
+
+		$("#resourcesBtn").click(function () {
+			$("#homeBtn").removeClass('active');
+			$("#aboutBtn").removeClass('active');
+			$("#resourcesBtn").addClass('active');
+			$('html, body').animate({
+				scrollTop: $("#resources").offset().top
+			}, 2000);
+		});
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Registration</title>
+    <link rel="stylesheet" href="../assets/css/profile.css">
+    <link rel="stylesheet" href="../assets/css/newRegistration.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+
+<body>
+    <div id="root" class="main-container">
+        <div class="header-area md:h-[91vh] mb-20 md:mb-0">
+            <div id="header" class="w-full h-[65px] text-white">
+                <div id="header-lg" class="flex items-center mx-[33px] pt-[13px]">
+                    <div class="w-4/12">
+                        <div id="logo-img">
+                            <a href="/index.html"><img src="../assets/imgs/Logo.svg" width="165" alt="logo-img"
+                                    class="logo"></a>
+                        </div>
+                    </div>
+                    <div id="nav-bar" class="lg:w-8/12 lg:float-right lg:relative absolute h-full w-full left-0 top-0">
+                        <ul
+                            class="h-full flex lg:flex-row flex-col gap-[34px] lg:justify-end items-center justify-center w-full">
+                            <li>
+                                <a href="./profile.html"><p>Dashboard</p></a>
+                            </li>
+                            <!-- <li>
+                                <p>Vehicles</p>
+                            </li> -->
+                            <li>
+                                <a href="./vehicles.html"><p>Vehicles</p></a>
+                            </li>
+                            <li class="active">
+                                <p>Register New Vehicle</p>
+                            </li>
+                            <li>
+                                <a href="./transferVehicle.html"><p>Transfer Vehicles</p></a>
+                            </li>
+                            <li class="flex items-center gap-[14px]">
+                                <Button class="btn btn-circle user_id">
+                                </Button>
+                                <Button onclick="App.logoutUser()">
+                                    Logout
+                                </Button>
+                                <!-- <p id="icon-cirlce" class="bg-[#5034b8] text-white">P</p>
+                                <p class="triangle-down"></p> -->
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="hamburger" class="lg:hidden lg:w-0 w-8/12 text-right">
+                        icon
+                    </div>
+                </div>
+                <hr class="mt-[10px] shadow-border">
+            </div>
+
+            <div id="content-container" style="margin-top: initial;" class="w-full px-2 md:px-0 md:w-10/12 md:h-[80vh] flex flex-col justify-center">
+
+                <!-- <div id="reg_new_vehicle" class="w-full flex justify-center items-center my-0 mx-auto"> -->
+                <div id="reg_new_vehicle" class="w-full grid md:grid-cols-2 grid-cols-1 my-0 mx-auto">
+                    <div class="hero-section self-center">
+                        <div class="hero-text">
+                            <h1 class="title">
+                                Find Vehicles Good for you
+                            </h1>
+                            <p class="subtitle">
+                                We have thousands of cars registered under the
+                                system of blockchain technology which provides
+                            </p>
+                            <h2 class="focus">
+                                TRUST and SECURITY
+                            </h2>
+                        </div>
+
+                        <div class="hero-btn">
+                            <button class="about-btn">About</button>
+                        </div>
+                    </div>
+                    <div class="reg_form">
+                        <div class="reg-form">
+                            <p class="h3 text-white text-center">
+                                Enter New Vehicle's Detail
+                            </p>
+                            <form onSubmit="App.regVehicle(); return false;">
+                                <div class="form">
+                                    <div>
+                                        <input class="uppercase" type="text" id="vehno" placeholder="Vehicle No / Register No">
+                                        <small class=" text-white">Letter in uppercase followed by Numbers.</small>
+                                    </div>
+                                    <div>
+                                        <input class="uppercase" type="text" id="engno" placeholder="Engine No" maxlength="6">
+                                        <small class=" text-white">Sometimes engin and chaises no are same.</small>
+                                    </div>
+                                    <div>
+                                        <input class="uppercase" type="text" id="chano" placeholder="Chasis No">
+                                        <small class=" text-white">Chaises no can be changed if you want to.</small>
+                                    </div>
+                                    <div>
+                                        <input type="text" id="company" placeholder="COMPANY">
+                                        <small class=" text-white">Company name should not be numeric.</small>
+                                    </div>
+                                    <div>
+                                        <input type="text" id="model" placeholder="MODEL / VEHICLE TYPE">
+                                        <small class=" text-white">Vehicle Type: Bike, Car, Truck and etc.</small>
+                                    </div>
+                                    <div>
+                                        <input type="text" id="year" placeholder="YEAR">
+                                        <small class=" text-white">Numerical 4 Characters.</small>
+                                    </div>
+                                    <div>
+                                        <input type="text" id="color" placeholder="COLOR">
+                                    </div>
+    
+                                    <div>
+                                        <button class="new-reg" id="submit-new-reg">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+        <div class="footer-area fixed bottom-0 w-full">
+            <p>
+                This is the footer area. It will contain the Quick Links and Social Links.
+                <strong>Copyright &copy; 2022.</strong> All Rights Reserved by the Developer.
+            </p>
+        </div>
+    </div>
+
+    <!-- jquery cdn -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script> -->
+    <script src="../assets/js/jquery_cdn.js"></script>
+    <!-- tailwind css -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- required plugins -->
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
+    <script src="/node_modules/truffle-contract/dist/truffle-contract.js"></script>
+
+    <!-- custom JS -->
+    <script src="../assets/js/app.js"></script>
+
+    <script>
+        $('#engno').on('keyup', function () {
+            $('#chano').val($(this).val())
+        });
+    </script>
+    
+</body>
+
+</html>
