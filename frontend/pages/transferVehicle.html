@@ -70,7 +70,7 @@
             <div id="content-container" style="margin-top: initial;" class="w-full px-2 md:px-0 md:w-10/12 md:h-[80vh] flex flex-col justify-center">
 
                 <div id="reg_new_vehicle" class="w-full grid md:grid-cols-2 grid-cols-1 my-0 mx-auto">
-                    <div class="hero-section">
+                    <div class="hero-section self-center">
                         <div class="hero-text">
                             <h1 class="title">
                                 Find Vehicles Good for you
@@ -90,14 +90,14 @@
                     </div>
                     <div class="reg_form">
                         <div class="reg-form">
-                            <p class="h3 text-white text-center">
+                            <p class="h3 text-white text-center md:w-[470px] ">
                                 Select Vehicle To Transfer
                             </p>
                             <form onSubmit="App.transferVehicle(); return false;">
                                 <div class="form">
                                     <div>
                                         <select onchange="App.transferFormUpdate(this)" id="vehicles_select"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="md:w-[470px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option value="vehicle_no">Vehicle No</option>
                                         </select>
                                     </div>
@@ -120,7 +120,7 @@
                                         <input style="color: white;" type="text" id="year" placeholder="Year" disabled>
                                     </div>
                                     <div>
-                                        <input style="color: white;" type="text" id="new_nic" placeholder="Transfer to _CNIC">
+                                        <input style="color: white;" type="text" id="new_nic" placeholder="Transfer to _CNIC"><br>
                                         <small class=" text-red-400">User Can Not Transfer Vehicle To Non-Registred and Him/herSelf.</small>
                                     </div>
 
